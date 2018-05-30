@@ -6,58 +6,57 @@
 #define c_for_each(begin, end, array,type) \
                    for(int i=(begin); i<(end); ++i) printf(type,array[i]);
 char* multi(char* s){
-    int bit,pointBit,j,tempLen,result[BIT_MAX],improve;
+    int bit=0,pointBit=0,tempLen=0,result[BIT_MAX]={0},improve;
     char resultStr[BIT_MAX];
     int len =strlen(s);
-    int splitNum[len],count[len];
+    int splitNum[len];
     char temp[1];
     for(int i=0;i<len;i++){
+        splitNum[i]=0;
         if(s[i] =='.'){
-            j = len-i-1;
-            while(j--){
-                pointBit *= 10;
-            }
+            pointBit = len-i-1;
             continue;
         }
         temp[0] =s[i];
         splitNum[tempLen++] = atoi(temp);
     }
-    c_for_each(0,bit,splitNum,"%d");
     for(int i=tempLen;i>0;i--){
         bit = tempLen-i;
         for(int m=tempLen;m>0;m--){
            result[bit++] += splitNum[i-1]*splitNum[m-1];
         }
     }
-    c_for_each(0,bit,result,"%d");
-    printf("resultstr:\n");
-    printf("%d\n",bit);
     improve = 0;
-    for(int i=bit;i>0;i--){
-        result[i-1] += improve;
-        improve = result[i-1]/10;
-        sprintf(temp,"%d",result[i-1]%10);
-        resultStr[i-1] = temp[0];
+    char tt[1];
+    for(int i=0;i<bit;i++){
+        result[i] += improve;
+        improve = result[i]/10;
+        sprintf(temp,"%d",result[i]%10);
+        tt[0] = temp[0];
+        resultStr[i] = tt[0];
     }
-    char aa[1000];
     if(improve){
-        sprintf(aa,"%d",improve);
-        strcat(aa,resultStr);
-        strcpy(resultStr,aa);
+        sprintf(temp,"%d",improve);
+        resultStr[bit] = temp[0];
     }
-    c_for_each(0,bit+1,resultStr,"%c");
-
+    pointBit *=2;
+    for(int i=bit;i>=0;i--){
+        if(i == pointBit-1){
+            putchar('.');
+        }
+        printf("%c",resultStr[i]);
+    }
 
     return s;
 }
 int main(){
     char s[7] ;
-    int n;
+    // int n;
     // while(scanf("%s%d",s,&n)==2){
     //     printf("%s",s);
     //     printf("%d",n);
 
     // }
-    strcpy(s,"331");
+    strcpy(s,"33.1");
     multi(s);
 }
