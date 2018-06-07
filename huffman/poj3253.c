@@ -20,7 +20,6 @@ int main(int argc, char const *argv[])
         int t = L[mii1]+L[mii2];
         printf("%d\n",t);
         ans+=t;
-        // if(mii1==T-1)SWAP(mii1,mii2);
         L[mii1]=t;
         L[mii2]=L[T-1];
         T--;
