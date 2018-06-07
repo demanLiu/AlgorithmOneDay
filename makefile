@@ -1,0 +1,13 @@
+CC=gcc 
+OPTION=-std=c99 -Wall -g
+BIGNUMBERPATH=bigNumber
+HUFFMANPATH=huffman
+BIGSRC=$(BIGNUMBERPATH)/square.c
+HUFFMANSRC=$(HUFFMANPATH)/poj3253.c
+bigN: $(BIGSRC)
+	$(CC) $(OPTION) $(BIGSRC) -o $(BIGNUMBERPATH)/main
+huff : $(HUFFMANSRC)
+	$(CC) $(OPTION) $(HUFFMANSRC) -o $(HUFFMANPATH)/main
+
+clean:
+	rm -f $(BIGNUMBERPATH)/main  $(HUFFMANPATH)/main
