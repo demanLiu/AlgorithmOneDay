@@ -92,3 +92,28 @@ int *isPrimeV4(int a)
     }
     return primeArr;
 }
+
+int *isPrimeV5(int a)
+{
+    int n = a + 1;
+    int *primeArr = (int *)malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++)
+    {
+        primeArr[i] = 1;
+    }
+    for (int i = 2; i < n; i++)
+    {
+        if (primeArr[i] == 0)
+        {
+            continue;
+        }
+        //从i的平方开始标记即可，不需要从2*i, 因为i*i 之前的数会被i小的素数标记
+        // eg n=100 i= 5     5*5  之前的是 5*4 (2* 10标记)  5*3 (3标记) 5*2 (2标记)
+        for (int j = i * i; j < n; j += i)
+        {
+            primeArr[j] = 0;
+        }
+    }
+    return primeArr;
+}
